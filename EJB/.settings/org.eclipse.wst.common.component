@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="5sem_EJB">
+        <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
+        <property name="java-output-path" value="/5sem_EJB/build/classes"/>
+        <property name="ClientProject" value="5sem_Interface_EJB"/>
+        <property name="ClientJARURI" value="5sem_Interface_EJB.jar"/>
+    </wb-module>
+</project-modules>
