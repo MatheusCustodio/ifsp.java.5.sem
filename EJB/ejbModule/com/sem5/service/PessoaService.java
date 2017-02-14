@@ -8,6 +8,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
+import com.sem5.DAO.PessoaDAO;
 import com.sem5.entity.Pessoa;
 import com.sem5.services.PessoaServiceLocal;
 import com.sem5.services.PessoaServiceRemote;
@@ -16,18 +17,19 @@ import com.sem5.services.PessoaServiceRemote;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class PessoaService implements PessoaServiceLocal, PessoaServiceRemote {
+	
+	private PessoaDAO dao;
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void savePessoa(Pessoa pessoa) {
-		// TODO Auto-generated method stub
-		
+		this.getDao().persist(pessoa);
 	}
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void updatePessoa(Pessoa pessoa) {
-		// TODO Auto-generated method stub
+		this.getDao().update(pessoa);
 		
 	}
 
@@ -43,5 +45,15 @@ public class PessoaService implements PessoaServiceLocal, PessoaServiceRemote {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public PessoaDAO getDao() {
+		return dao;
+	}
+
+	public void setDao(PessoaDAO dao) {
+		this.dao = dao;
+	}
+	
+	
 
 }
