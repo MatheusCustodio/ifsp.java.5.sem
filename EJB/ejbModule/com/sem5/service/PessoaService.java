@@ -2,6 +2,8 @@ package com.sem5.service;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.PostActivate;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -10,15 +12,31 @@ import javax.ejb.TransactionManagementType;
 
 import com.sem5.DAO.PessoaDAO;
 import com.sem5.entity.Pessoa;
+import com.sem5.persistency.Persistency;
 import com.sem5.services.PessoaServiceLocal;
 import com.sem5.services.PessoaServiceRemote;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class PessoaService implements PessoaServiceLocal, PessoaServiceRemote {
+public class PessoaService extends Persistency implements PessoaServiceLocal, PessoaServiceRemote {
 	
 	private PessoaDAO dao;
+	
+	
+	public PessoaDAO getDao() {
+		return dao;
+	}
+
+	public void setDao(PessoaDAO dao) {
+		this.dao = dao;
+	}
+
+	@PostConstruct
+	@PostActivate
+	public void init(){
+		dao = new PessoaDAO(this.getEntityManager());
+	}
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -32,28 +50,19 @@ public class PessoaService implements PessoaServiceLocal, PessoaServiceRemote {
 		this.getDao().update(pessoa);
 		
 	}
-
+	
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void deletePessoa(long id) {
-		// TODO Auto-generated method stub
+		this.getDao().remove(this.getDao().findById(id));
 		
 	}
 
 	@Override
 	public List<Pessoa> listaPessoas() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getDao().findAll(Pessoa.class);
+		
 	}
 
-	public PessoaDAO getDao() {
-		return dao;
-	}
-
-	public void setDao(PessoaDAO dao) {
-		this.dao = dao;
-	}
-	
-	
 
 }
