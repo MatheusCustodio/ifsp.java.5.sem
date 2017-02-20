@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>5sem_EJB</project>
-		<project>5sem_Interface_EJB</project>
 		<project>5sem_JPA</project>
 		<project>5sem_WAR</project>
 	</projects>
