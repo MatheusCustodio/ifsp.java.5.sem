@@ -12,5 +12,8 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="5sem_Interface_EJB.jar" deploy-path="/lib" handle="module:/resource/5sem_Interface_EJB/5sem_Interface_EJB">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
